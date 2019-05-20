@@ -15,7 +15,8 @@ def SendMail(username, password, to_list, content, subject):
         smtp_obj.connect(mail_host, 25)
         smtp_obj.login(username, password)
         print('Login Success!')
-        smtp_obj.sendmail(username, to_list, message.as_string())
+        for to_addr in to_list:
+            smtp_obj.sendmail(username, to_addr, message.as_string())
         print('Send Email Success!')
         smtp_obj.quit()
     except smtplib.SMTPException:
@@ -33,12 +34,12 @@ def SendTimingMail(send_hour, send_minute, username, password, to_list, content,
 if __name__ == '__main__':
     username = "youzunzhi@163.com"
     password = "xxx"
-    to_list = ["youzunzhi@163.com"]
+    to_list = ["youzunzhi@163.com", "youzunzhi@163.com"]
     content = "Hi there."
     subject = 'Python Mail Test'
 
-    send_hour = 14
-    send_minute = 4
+    send_hour = 21
+    send_minute = 8
 
     SendTimingMail(send_hour, send_minute, username, password, to_list, content, subject)
     print('Done.')
